@@ -1,0 +1,12 @@
+.header {
+  --modalPadding: 2rem 0 6rem 2rem;
+  color: var(--colorGrape);
+
+  &__title {
+    font-size: var(--headerFontSize);
+  }
+
+  &__text {
+    color: rgb(21, 212, 21);
+  }
+}
