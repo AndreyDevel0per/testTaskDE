@@ -1,12 +1,19 @@
 .header {
-  --modalPadding: 2rem 0 6rem 2rem;
-  color: var(--colorGrape);
+  --headerWidth: 150rem;
+  --headerHeight: 6rem;
+  --headerMarginTop: 5rem;
+  --headerButtonWidth: 4rem;
+  --headerButtonHeight: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--headerWidth);
+  height: var(--headerHeight);
+  margin: auto;
+  margin-top: var(--headerMarginTop);
 
-  &__title {
-    font-size: var(--headerFontSize);
-  }
-
-  &__text {
-    color: rgb(21, 212, 21);
+  &__button {
+    width: var(--headerButtonWidth);
+    height: var(--headerButtonHeight);
   }
 }

@@ -1,0 +1,13 @@
+.modal(data-js-modal="contact")
+  .modal__container
+    span.close(data-js-modal-close) &times;
+    .modal__wrapper
+      h3.modal__title SEND US MESSAGE
+      form.modal__content(action="#")
+        label(for="name") Full Name
+        input(type="text" id="name" placeholder="Your Name")
+        label(for="email") Email
+        input(type="text" id="email" placeholder="Your Email")
+        label(for="message") Message
+        textarea(name="" id="message" placeholder="Your Message")
+        button.button SUBMIT   

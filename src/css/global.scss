@@ -1,4 +1,64 @@
+html {
+  font: var(--baseFontWeight) var(--baseFontSize) / var(--baseLineHeight)
+    var(--baseFontFamily);
+}
+
+html.noscroll {
+  position: fixed;
+  overflow-y: scroll;
+  width: 100%;
+  top: var(--st);
+}
+
 body {
-  background-color: rgb(97, 87, 87);
-  font-size: var(--baseFontSize);
+  font-size: var(--textFontSize);
+  letter-spacing: var(--textLetterSpacing);
+}
+
+.container {
+  max-width: calc(var(--containerWidth) + var(--containerPaddingX) * 2);
+  margin-inline: auto;
+  padding-inline: var(--containerPaddingX);
+}
+
+h1 {
+  font-family: var(--headerFontFamily);
+  font-size: var(--headerFontSize);
+  line-height: var(--headerLineHeight);
+  font-weight: var(--headerFontWeight);
+  letter-spacing: 0.038em;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--h2FontWeight);
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  line-height: var(--h2LineHeight);
+  font-size: var(--h2FontSize);
+  letter-spacing: 0.05em;
+}
+
+h3 {
+  line-height: var(--h3LineHeight);
+  font-size: var(--h3FontSize);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 56px;
+  width: 100%;
+  max-width: 220px;
+  padding: 10px;
+  padding-top: 7px;
+  color: var(--colorWhite);
+  background-color: var(--colorBlueGray);
+  border-radius: var(--borderRadius);
 }

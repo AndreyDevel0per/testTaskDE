@@ -1,4 +1,28 @@
 :root {
   --headerFontSize: 8rem;
-  --baseFontSize: 2rem;
+  --headerLineHeight: 9.25rem;
+  --headerFontFamily: Galien, sans-serif;
+  --headerFontWeight: 700;
+
+  --baseFontSize: 8px; /* 1rem */
+  --baseFontFamily: Gilroy, sans-serif;
+  --baseLineHeight: 3.25rem;
+  --baseFontWeight: normal;
+
+  // --st:
+
+  --h2FontWeight: 600;
+  --h2LineHeight: 5.75rem;
+  --h2FontSize: 4.5rem;
+
+  --h3LineHeight: 3.75rem;
+  --h3FontSize: 2.5rem;
+
+  --containerWidth: 117.5rem;
+  --containerPaddingX: 1.875rem;
+
+  --borderRadius: 1.35rem;
+
+  --textFontSize: 2rem;
+  --textLetterSpacing: 0.05em;
 }
