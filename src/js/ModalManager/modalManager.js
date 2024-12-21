@@ -16,20 +16,22 @@ export class ModalManager {
 
   constructor() {
     if (ModalManager.instance) return ModalManager.instance;
+    this.currentModal = null;
     this.#bindEvents();
     ModalManager.instance = this;
   }
 
-  #openModal(modalId) {
+  openModal(modalId) {
     const modal = document.querySelector(`[${this.attrs.modal}="${modalId}"]`);
     if (modal) {
       modal.style.display = "block";
       ScrollLockManager.lock();
+      this.currentModal = modal;
     }
   }
 
-  #closeModal(modal) {
-    modal.style.display = "none";
+  closeModal() {
+    this.currentModal.style.display = "none";
     ScrollLockManager.unlock();
   }
 
@@ -39,7 +41,7 @@ export class ModalManager {
     //открыть модалку
     if (target.hasAttribute(`${this.attrs.button}`)) {
       const modalId = target.getAttribute(this.attrs.button);
-      this.#openModal(modalId);
+      this.openModal(modalId);
       return;
     }
 
@@ -47,7 +49,7 @@ export class ModalManager {
     if (target.hasAttribute(this.attrs.closeButton)) {
       const modal = target.closest(`[${this.attrs.modal}]`);
       if (modal) {
-        this.#closeModal(modal);
+        this.closeModal(modal);
       }
       return;
     }
@@ -55,7 +57,7 @@ export class ModalManager {
     //закртыть при клике вне области
     const modal = target.closest(`[${this.attrs.modal}]`);
     if (modal && target === modal) {
-      this.#closeModal(modal);
+      this.closeModal(modal);
     }
   }
 

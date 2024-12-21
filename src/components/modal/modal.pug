@@ -3,11 +3,11 @@
     span.close(data-js-modal-close) &times;
     .modal__wrapper
       h3.modal__title SEND US MESSAGE
-      form.modal__content(action="#")
+      form.modal__content(action="#" data-js-form='{"url":"./message", "method": "POST", "showModalAfterSuccess": "modalSuccess", "showModalAfterError": "modalError","preventDefault": true}')
         label(for="name") Full Name
-        input(type="text" id="name" placeholder="Your Name")
+        input(type="text" name="userName" id="name" placeholder="Your Name")
         label(for="email") Email
-        input(type="text" id="email" placeholder="Your Email")
+        input(type="text" name="email" id="email" placeholder="Your Email")
         label(for="message") Message
-        textarea(name="" id="message" placeholder="Your Message")
-        button.button SUBMIT   
+        textarea(name="message" id="message" placeholder="Your Message")
+        button.button(type="submit") SUBMIT
