@@ -29,4 +29,17 @@
   &__title {
     padding-top: 56px;
   }
+
+  &__closeBtn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  &:hover {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+  }
 }

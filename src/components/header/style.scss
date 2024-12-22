@@ -5,7 +5,6 @@
   --headerButtonWidth: 4rem;
   --headerButtonHeight: 4rem;
   --headerPadding: 2.5rem;
-  --headerMarginTopLapTop: 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,7 +21,7 @@
 
 @media (width <= 1350px) {
   .header {
+    --headerMarginTop: 2.5rem;
     padding-inline: var(--headerPadding);
-    margin-top: var(--headerMarginTopLapTop);
   }
 }

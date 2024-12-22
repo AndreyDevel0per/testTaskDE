@@ -9,13 +9,14 @@ export class FormHandler {
 
   attrs = {
     form: "data-js-form",
+    needValidation: "data-js-form-validation-required",
   };
 
   constructor() {
     if (FormHandler.instance) return FormHandler.instance;
     this.#bindEvents();
     this.modalManager = new ModalManager();
-    this.formValidator = new FormValidator(this.rules);
+    this.formValidator = new FormValidator();
     FormHandler.instance = this;
   }
 
@@ -26,18 +27,11 @@ export class FormHandler {
     return FormHandler.instance;
   }
 
-  #validate(target) {
-    if (!target.getAttribute("data-js-form-validation-required") === true) {
-      return true;
+  isNeedValidation(target) {
+    if (!target.hasAttribute(this.attrs.needValidation)) {
+      return false;
     }
-    const isValid = this.formValidator.validateForm(target);
-    if (isValid) {
-      console.debug("Форма валидна, отправляем данные.");
-    } else {
-      console.error("Ошибки валидации:", this.formValidator.getErrors());
-      this.formValidator.displayErrors(target);
-    }
-    return isValid;
+    return true;
   }
 
   #handleSubmit(e) {
@@ -63,7 +57,14 @@ export class FormHandler {
       e.preventDefault();
     }
 
-    if (!this.#validate(target)) return;
+    if (this.isNeedValidation(target)) {
+      const isFormValid = this.formValidator.validateForm({
+        form: target,
+      });
+      if (!isFormValid) {
+        return;
+      }
+    }
 
     submitter.disabled = true;
 

@@ -1,80 +1,102 @@
-import { defaultRules } from "./config/constants";
-
 /**
  * Класс для валидации форм
  * принимает форму и валидирует все её элементы
  */
 export class FormValidator {
-  constructor(rules) {
-    this.rules = rules || defaultRules;
-    this.errors = {};
+  static attrs = {
+    inputRequired: "data-js-input-required",
+    validationContainer: "data-js-validation-container",
+    errorMsg: "data-js-validation-error-message",
+  };
+
+  static stateClasses = {
+    error: "error",
+  };
+
+  constructor() {
+    if (FormValidator.instance) return FormValidator.instance;
+    FormValidator.instance = this;
   }
 
-  validateForm(form) {
-    this.errors = {};
-    const elements = form.elements;
+  validateForm({ form, isNeedShowErrors = true }) {
+    let isFormValid = true;
 
-    for (const fieldName in this.rules) {
-      const field = elements[fieldName];
-
-      if (!field) continue;
-      if (!field.getAttribute("data-js-input-required") === true) continue;
-
-      const fieldRules = this.rules[fieldName];
-      const value = field.value.trim();
-
-      for (const rule of fieldRules) {
-        const { type, message, params } = rule;
-
-        if (!this.#applyRule(type, value, params, form)) {
-          if (!this.errors[fieldName]) this.errors[fieldName] = [];
-          this.errors[fieldName].push(message);
-        }
+    Array.from(form.elements).forEach((element) => {
+      const requiredType = element.getAttribute(
+        FormValidator.attrs.inputRequired
+      );
+      if (!requiredType) {
+        return;
       }
-    }
 
-    return Object.keys(this.errors).length === 0;
+      const isValid = this.getValidationInput(requiredType, element.value);
+
+      if (!isValid) {
+        isFormValid = false;
+
+        if (isNeedShowErrors) {
+          this.displayError(element, requiredType);
+        }
+      } else {
+        this.clearError(element);
+      }
+    });
+
+    return isFormValid;
   }
 
-  getErrors() {
-    return this.errors;
-  }
-
-  #applyRule(type, value, params, form) {
+  getValidationInput(type, value) {
     switch (type) {
-      case "required":
-        return value !== "";
-      case "minLength":
-        return value.length >= params;
-      case "maxLength":
-        return value.length <= params;
-      case "pattern":
-        return new RegExp(params).test(value);
       case "email":
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      case "equals":
-        const otherField = form.elements[params];
-        return otherField && value === otherField.value;
+      case "phone":
+        return /^\+?\d{1,4}?[-.\s]?(\(?\d{1,4}?\))?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+          value
+        );
+      case "text":
+        return value.trim().length > 0;
       default:
         return true;
     }
   }
 
-  displayErrors(form) {
-    //удаляет старые ошибки
-    form.querySelectorAll(".errorMessage").forEach((el) => el.remove());
-
-    for (const fieldName in this.errors) {
-      const field = form.elements[fieldName];
-      if (!field) continue;
-
-      const errorMessages = this.errors[fieldName].join(", ");
-
-      const errorElement = document.createElement("div");
-      errorElement.className = "errorMessage";
-      errorElement.textContent = errorMessages;
-
-      field.parentNode.insertBefore(errorElement, field.nextSibling);
+  displayError(element, type) {
+    const container = element.closest(
+      `[${FormValidator.attrs.validationContainer}]`
+    );
+    if (!container) {
+      console.warn(
+        `Не найден контейнер для отображения ошибок для элемента`,
+        element
+      );
+      return;
     }
+
+    let errorMsg = container.querySelector(`[${FormValidator.attrs.errorMsg}]`);
+    if (!errorMsg) {
+      errorMsg = document.createElement("div");
+      errorMsg.setAttribute(FormValidator.attrs.errorMsg, "");
+      container.appendChild(errorMsg);
+    }
+
+    errorMsg.textContent = `Поле ${type} заполнено некорректно`;
+    container.classList.add(FormValidator.stateClasses.error);
+  }
+
+  clearError(element) {
+    const container = element.closest(
+      `[${FormValidator.attrs.validationContainer}]`
+    );
+    if (!container) {
+      return;
+    }
+
+    const errorMsg = container.querySelector(
+      `[${FormValidator.attrs.errorMsg}]`
+    );
+    if (errorMsg) {
+      errorMsg.textContent = "";
+    }
+    container.classList.remove(FormValidator.stateClasses.error);
   }
 }

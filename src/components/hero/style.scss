@@ -3,47 +3,112 @@
   --heroAfterHeight: 97.5rem;
   --heroAfterOpacity: 0.2;
 
-  --titleWidth: 63.75rem;
-  --titlePaddingTop: 12.625rem;
+  --heroTitleWidth: 63.75rem;
+  --heroTitlePaddingTop: 12.625rem;
+  --heroTitleFontSize: 4.75rem;
+  --heroTitleLineHeight: 5.625rem;
 
-  --textWidth: 53.125rem;
-  --textPaddingTop: 5.25rem;
-  --textOpacity: 0.6;
+  --heroSubtitleWidth: 53.125rem;
+  --heroSubtitlePaddingTop: 5.25rem;
+  --heroSubtitleOpacity: 0.6;
+  --heroSubtitleFontSize: 1.75rem;
+  --heroSubtitleLetterSpacing: 0.04em;
 
-  --imgLeft: 48%;
-  --imgTop: -60.625rem;
-  --imgWidth: 45.5%;
+  --heroImgLeft: 48%;
+  --heroImgTop: -60.625rem;
+  --heroImgMaxWidth: 45.5%;
 
-  --btnMarginTop: 9.375rem;
-  --btnLetterSpacing: 0.05rem;
+  --heroBtnMarginTop: 9.375rem;
+  --heroBtnLetterSpacing: 0.05rem;
   max-height: var(--heroHeight);
   color: var(--colorYaleBlue);
 
+  @media (width <= 1023px) {
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
   &__img {
     position: relative;
-    left: var(--imgLeft);
-    top: var(--imgTop);
+    left: var(--heroImgLeft);
+    top: var(--heroImgTop);
     z-index: -1;
     width: 100%;
-    max-width: var(--imgWidth);
+    max-width: var(--heroImgMaxWidth);
     height: auto;
     object-fit: cover;
+
+    @media (width <= 1350px) {
+      --heroImgTop: -53.125rem;
+    }
+
+    @media (width <= 1023px) {
+      --heroImgMaxWidth: 40%;
+      --heroImgLeft: 50%;
+      --heroImgTop: -26.25rem;
+      transform: translate(-50%, -50%);
+    }
+
+    @media (width <= 767px) {
+      --heroImgMaxWidth: 55%;
+      --heroImgTop: -23.75rem;
+    }
+
+    @media (width <= 540px) {
+      --heroImgMaxWidth: 60%;
+    }
   }
 
   &__title {
-    max-width: var(--titleWidth);
-    padding-top: var(--titlePaddingTop);
+    max-width: var(--heroTitleWidth);
+    padding-top: var(--heroTitlePaddingTop);
+    @media (width <= 1023px) {
+      --heroTitlePaddingTop: 1.375rem;
+      text-align: center;
+    }
+
+    @media (width <= 767px) {
+      font-size: var(--heroTitleFontSize);
+      line-height: var(--heroTitleLineHeight);
+    }
+
+    @media (width <= 540px) {
+      --heroTitleWidth: 80%;
+    }
   }
 
-  &__text {
-    max-width: var(--textWidth);
-    padding-top: var(--textPaddingTop);
-    opacity: var(--textOpacity);
+  &__subtitle {
+    max-width: var(--heroSubtitleWidth);
+    padding-top: var(--heroSubtitlePaddingTop);
+    opacity: var(--heroSubtitleOpacity);
+    @media (width <= 1023px) {
+      --heroSubtitleWidth: 80%;
+      --heroSubtitlePaddingTop: 5.25rem;
+      text-align: center;
+    }
+
+    @media (width <= 540px) {
+      font-size: var(--heroSubtitleFontSize);
+      letter-spacing: var(--heroSubtitleLetterSpacing);
+    }
   }
 
   &__btn {
-    margin-top: var(--btnMarginTop);
-    letter-spacing: var(--btnLetterSpacing);
+    margin-top: var(--heroBtnMarginTop);
+    letter-spacing: var(--heroBtnLetterSpacing);
+    @media (width <= 1023px) {
+      --heroBtnMarginTop: 43.75rem;
+    }
+
+    @media (width <= 767px) {
+      --heroBtnMarginTop: 40rem;
+    }
   }
 
   &::after {
@@ -56,83 +121,5 @@
     height: var(--heroAfterHeight);
     background: var(--gradient);
     opacity: var(--heroAfterOpacity);
-  }
-}
-
-@media (width <= 1350px) {
-  .hero {
-    &__img {
-      top: -425px;
-    }
-  }
-}
-
-@media (width <= 1023px) {
-  .hero {
-    display: flex;
-    flex-direction: column;
-
-    &__content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    &__btn {
-      margin-top: 350px;
-    }
-
-    &__img {
-      max-width: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      top: -210px;
-    }
-
-    &__title {
-      text-align: center;
-      padding-top: 11px;
-    }
-
-    &__text {
-      max-width: 80%;
-      text-align: center;
-      padding-top: 42px;
-    }
-  }
-}
-
-@media (width <= 767px) {
-  .hero {
-    &__title {
-      font-size: 38px;
-      line-height: 45px;
-    }
-
-    &__img {
-      max-width: 45%;
-      top: -190px;
-    }
-
-    &__btn {
-      margin-top: 320px;
-    }
-  }
-}
-
-@media (width <= 540px) {
-  .hero {
-    &__title {
-      max-width: 80%;
-    }
-
-    &__img {
-      max-width: 60%;
-    }
-
-    &__text {
-      font-size: 14px;
-      letter-spacing: 0.04em;
-    }
   }
 }
