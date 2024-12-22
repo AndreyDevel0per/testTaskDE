@@ -2,7 +2,14 @@
   --colorGrape: #600fa3;
   --colorBlueGray: #5a98d0;
   --colorWhite: #fff;
-  --lapisLazuli: #316099;
+  --colorLapisLazuli: #316099;
+  --colorYaleBlue: #1f3f68;
 
-  --colorBlue: var(--lapisLazuli);
+  --gradient: linear-gradient(
+    0deg,
+    #98c3e8 8.84%,
+    rgba(152, 195, 232, 0) 31.12%
+  );
+
+  --colorBlue: var(--colorLapisLazuli);
 }
