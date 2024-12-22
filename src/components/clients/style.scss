@@ -13,11 +13,6 @@
     height: 872px;
     background-color: var(--colorBlueGray);
   }
-
-  // @media (width <= 1023px) {
-  //   padding-left: 125px;
-  //   padding-right: 125px;
-  // }
 }
 
 .clients {
@@ -70,32 +65,6 @@
     }
   }
 
-  &__item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-right: 1px solid;
-    border-bottom: 1px solid transparent;
-
-    &:nth-child(4n) {
-      border-right: none;
-    }
-
-    &:nth-child(-n + 4) {
-      border-bottom: 1px solid;
-    }
-
-    @media (width <= 1023px) {
-      &:nth-child(odd) {
-        border-right: 1px solid var(--colorWhite);
-      }
-    }
-  }
-
-  &__item h3 {
-    letter-spacing: 0.02em;
-  }
-
   &__link {
     color: var(--colorWhite);
     display: flex;
@@ -109,17 +78,66 @@
   }
 
   &__list {
-    margin-bottom: 25px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    overflow: hidden;
+    display: flex;
+    flex-flow: row wrap;
+    margin: auto;
 
     @media (width <= 1023px) {
-      grid-template-columns: repeat(2, 1fr);
+      max-width: 470px;
+      margin: 0 auto;
     }
 
     @media (width <= 540px) {
-      grid-template-columns: repeat(1, 1fr);
+      max-width: 350px;
+      justify-content: center;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    flex-basis: 235px;
+    align-items: center;
+    height: 128px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+
+    @media (width >= 1024px) {
+      &:not(:nth-child(4n + 4)) {
+        border-right: 1px solid var(--colorWhite);
+      }
+
+      &:nth-child(n) {
+        border-top: 1px solid var(--colorWhite);
+      }
+
+      &:nth-child(-n + 4) {
+        border-top: none;
+      }
+    }
+
+    @media (width <= 1023px) {
+      &:nth-child(n) {
+        border-top: 1px solid var(--colorWhite);
+      }
+
+      &:nth-child(-n + 2) {
+        border-top: none;
+      }
+
+      &:nth-child(2n + 1) {
+        border-right: 1px solid var(--colorWhite);
+      }
+    }
+
+    @media (width <= 540px) {
+      &:nth-child(2) {
+        border-top: 1px solid var(--colorWhite);
+      }
+
+      &:nth-child(n) {
+        border-right: none;
+      }
     }
   }
 }
