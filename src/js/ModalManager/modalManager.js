@@ -14,6 +14,11 @@ export class ModalManager {
     closeButton: "data-js-modal-close",
   };
 
+  static stateClasses = {
+    open: "visible",
+    close: "hidden",
+  };
+
   constructor() {
     if (ModalManager.instance) return ModalManager.instance;
     this.currentModal = null;
@@ -24,14 +29,20 @@ export class ModalManager {
   openModal(modalId) {
     const modal = document.querySelector(`[${this.attrs.modal}="${modalId}"]`);
     if (modal) {
-      modal.style.display = "block";
+      modal.classList.replace(
+        ModalManager.stateClasses.close,
+        ModalManager.stateClasses.open
+      );
       ScrollLockManager.lock();
       this.currentModal = modal;
     }
   }
 
   closeModal() {
-    this.currentModal.style.display = "none";
+    this.currentModal.classList.replace(
+      ModalManager.stateClasses.open,
+      ModalManager.stateClasses.close
+    );
     ScrollLockManager.unlock();
   }
 

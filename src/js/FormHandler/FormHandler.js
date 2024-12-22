@@ -1,3 +1,4 @@
+import { FormValidator } from "../FormValidator/FormValidator";
 import { ModalManager } from "../ModalManager/modalManager";
 
 /**
@@ -14,6 +15,7 @@ export class FormHandler {
     if (FormHandler.instance) return FormHandler.instance;
     this.#bindEvents();
     this.modalManager = new ModalManager();
+    this.formValidator = new FormValidator(this.rules);
     FormHandler.instance = this;
   }
 
@@ -22,6 +24,20 @@ export class FormHandler {
       FormHandler.instance = new FormHandler();
     }
     return FormHandler.instance;
+  }
+
+  #validate(target) {
+    if (!target.getAttribute("data-js-form-validation-required") === true) {
+      return true;
+    }
+    const isValid = this.formValidator.validateForm(target);
+    if (isValid) {
+      console.debug("Форма валидна, отправляем данные.");
+    } else {
+      console.error("Ошибки валидации:", this.formValidator.getErrors());
+      this.formValidator.displayErrors(target);
+    }
+    return isValid;
   }
 
   #handleSubmit(e) {
@@ -46,6 +62,8 @@ export class FormHandler {
     if (preventDefault) {
       e.preventDefault();
     }
+
+    if (!this.#validate(target)) return;
 
     submitter.disabled = true;
 

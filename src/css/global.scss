@@ -15,6 +15,14 @@ body {
   letter-spacing: var(--textLetterSpacing);
 }
 
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
 .container {
   max-width: calc(var(--containerWidth) + var(--containerPaddingX) * 2);
   margin-inline: auto;
