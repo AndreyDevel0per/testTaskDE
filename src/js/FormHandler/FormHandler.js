@@ -73,6 +73,7 @@ export class FormHandler {
       body: data,
     })
       .then((res) => {
+        target.reset();
         if (res.ok) {
           if (showModalAfterSuccess) {
             this.modalManager.closeModal();

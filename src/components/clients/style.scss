@@ -13,6 +13,11 @@
     height: 872px;
     background-color: var(--colorBlueGray);
   }
+
+  @media (width <= 1023px) {
+    padding-left: var(125px);
+    padding-right: var(125px);
+  }
 }
 
 .clients {
@@ -55,6 +60,12 @@
     &:nth-child(-n + 4) {
       border-bottom: 1px solid;
     }
+
+    @media (width <= 1023px) {
+      &:nth-child(odd) {
+        border-right: 1px solid var(--colorWhite);
+      }
+    }
   }
 
   &__item h3 {
@@ -78,5 +89,13 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     overflow: hidden;
+
+    @media (width <= 1023px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width <= 540px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 }
