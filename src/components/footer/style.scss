@@ -47,10 +47,20 @@
     @media (width<= 1024px) {
       --footerTitleMaxWidth: 100%;
     }
+
+    @media (width<= 480px) {
+      font-size: 20px;
+      line-height: 26px;
+    }
   }
 
   &__subtitle {
     color: var(--colorGray);
+
+    @media (width<= 480px) {
+      font-size: 10px;
+      line-height: 16px;
+    }
   }
 
   &__head {
@@ -221,5 +231,14 @@
 
   &__list-item:not(:last-child) {
     margin-bottom: 16px;
+  }
+
+  &__copyright {
+    position: relative;
+    z-index: 999;
+    color: var(--colorAccentGray);
+    font-size: 16px;
+    line-height: 1.625;
+    letter-spacing: 0.8px;
   }
 }

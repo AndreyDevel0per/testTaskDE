@@ -16,7 +16,7 @@
 
   --heroImgLeft: 48%;
   --heroImgTop: -60.625rem;
-  --heroImgMaxWidth: 45.5%;
+  --heroImgMaxWidth: 687px;
 
   --heroBtnMarginTop: 9.375rem;
   --heroBtnLetterSpacing: 0.05rem;
@@ -45,7 +45,8 @@
     object-fit: cover;
 
     @media (width <= 1350px) {
-      --heroImgTop: -53.125rem;
+      --heroImgTop: -49.125rem;
+      --heroImgMaxWidth: 50%;
     }
 
     @media (width <= 1023px) {

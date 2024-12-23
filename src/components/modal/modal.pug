@@ -6,14 +6,14 @@
       form.modal__content(action="#" id="contact" data-js-form-validation-required=true data-js-form='{"url":"https://89faa900550ad8ff.mokky.dev/messages", "method": "POST", "showModalAfterSuccess": "modalSuccess", "showModalAfterError": "modalError","isAjaxForm": true}')
         div.modal__block(data-js-validation-container)
           label.modal__label(for="name") Full Name
-          input(type="text" form="contact" name="userName" data-js-input-required="text" placeholder="Your Name")
+          input(type="text" id="name" form="contact" name="userName" data-js-input-required="text" placeholder="Your Name")
           div.modal__error.inputError(data-js-validation-error-message)
         div.modal__block(data-js-validation-container)
           label(for="email") Email
-          input(type="text" form="contact" name="email" data-js-input-required="email" placeholder="Your Email")
+          input(type="text" id="email" form="contact" name="email" data-js-input-required="email" placeholder="Your Email")
           div.modal__error.inputError(data-js-validation-error-message)
         div.modal__block(data-js-validation-container)
           label(for="message") Message
-          textarea(name="text" form="contact" data-js-input-required="text" placeholder="Your Message")
+          textarea(name="text" id="message" form="contact" data-js-input-required="text" placeholder="Your Message")
           div.modal__error.textAreaError(data-js-validation-error-message)
         button.modal__btn.button(type="submit") SUBMIT
