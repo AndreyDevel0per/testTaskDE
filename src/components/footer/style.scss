@@ -82,11 +82,28 @@
     display: flex;
     width: 100%;
     margin-bottom: 21px;
+
+    @media (width<=1023px) {
+      flex-wrap: wrap;
+      row-gap: 32px;
+      max-width: 90%;
+      margin: auto;
+    }
+
+    @media (width<=1023px) {
+      flex-wrap: wrap;
+      row-gap: 32px;
+      max-width: 90%;
+      margin: auto;
+    }
   }
 
   &__contacts {
     width: 37%;
     margin-left: 1px;
+    @media (width<=1023px) {
+      margin: auto;
+    }
   }
 
   &__logo {
@@ -102,6 +119,22 @@
       font-size: 28px;
       font-weight: 600;
     }
+
+    @media (width<=1023px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__list {
+    @media (width<=1023px) {
+      min-width: 205px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &__nav {
@@ -112,6 +145,30 @@
     margin-left: 3.8%;
     margin-bottom: 32px;
     padding: 15px;
+
+    @media (width<=1023px) {
+      margin: auto;
+      margin-left: 40px;
+      text-align: center;
+
+      & a {
+        min-width: 205px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      & h3 {
+        min-width: 205px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    @media (width<=540px) {
+      margin: auto;
+    }
 
     a {
       display: flex;
@@ -126,6 +183,10 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 22px;
+
+    @media (width<=1023px) {
+      text-align: center;
+    }
   }
 
   &__number {
@@ -150,5 +211,9 @@
   &__copyright {
     margin: 0 0 32px;
     opacity: 0.4;
+
+    @media (width<=1023px) {
+      padding-left: 30px;
+    }
   }
 }

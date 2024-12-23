@@ -1,19 +1,19 @@
 .modal.hidden(data-js-modal="contact")
   .modal__container
-    span.close(data-js-modal-close) &times;
+    span.modal__closeBtn(data-js-modal-close) &times;
     .modal__wrapper
       h3.modal__title SEND US MESSAGE
       form.modal__content(action="#" id="contact" data-js-form-validation-required=true data-js-form='{"url":"./message", "method": "POST", "showModalAfterSuccess": "modalSuccess", "showModalAfterError": "modalError","preventDefault": true}')
-        div(data-js-validation-container)
+        div.modal__block(data-js-validation-container)
           label(for="name") Full Name
           input(type="text" form="contact" name="userName" data-js-input-required="text" placeholder="Your Name")
           div(data-js-validation-error-message)
-        div(data-js-validation-container)
+        div.modal__block(data-js-validation-container)
           label(for="email") Email
           input(type="text" form="contact" name="email" data-js-input-required="email" placeholder="Your Email")
           div(data-js-validation-error-message)
-        div(data-js-validation-container)
+        div.modal__block(data-js-validation-container)
           label(for="message") Message
           textarea(name="text" form="contact" data-js-input-required="text" placeholder="Your Message")
           div(data-js-validation-error-message)
-        button.button(type="submit") SUBMIT
+        button.modal__btn.button(type="submit") SUBMIT

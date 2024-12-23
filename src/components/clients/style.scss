@@ -12,6 +12,16 @@
     width: 100%;
     height: 1023px;
     background-color: var(--colorBlueGray);
+
+    @media (width<=1023px) {
+      height: 1256px;
+      top: 800px;
+    }
+
+    @media (width<=540px) {
+      height: 1456px;
+      top: 900px;
+    }
   }
 }
 
