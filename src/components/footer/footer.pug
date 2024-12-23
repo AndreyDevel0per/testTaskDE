@@ -1,36 +1,43 @@
-.wrapperFooter
-  footer.footer
+footer.footer
+  .container.footer__wrapper
     .footer__head
       .footer__info
         h2.footer__title Intersted to work with our team?
-        p.footer__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-      button.footer__button.button(data-js-modal-button="contact") Let’s Talk
+        p.footer__subtitle Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+      button.footer__btn.button(type='button', data-js-modal-button="contact") Let’s Talk
     .footer__content
-      .footer__container
-        .footer__contacts
-          a.footer__logo(href="#")
-            img(src="assets/icons/footerLogo.svg" alt="Logo" width="48" height="48")
-            p Afrianska
-          ul.footer__list
-            li.footer__item
-              span.footer__number A.
-              p.footer__contact Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            li.footer__item
-              span.footer__number T.
-              a.footer__contact(href="tel:+62-812-7313-4321") +62-812-7313-4321
-            li.footer__item
-              span.footer__number E
-              a.footer__contact(href="mailto:hello.afrian@gmail.com") hello.afrian@gmail.com
-        .footer__nav
-          h3.footer__subtitle About US
-          a(href="#") About
-          a(href="#") What WeDo
-          a(href="#") Project
-          a(href="#") How It Work With Us
-        .footer__nav
-          h3.footer__subtitle Follow US
-          a(href="#") Instagram
-          a(href="#") Facebook
-          a(href="#") LinkedIn
-          a(href="#") Youtube
-      p.footer__copyright 2019 Afrianska. All rights reserved
+      .footer__contacts
+        a(href="#")
+          .footer__logo
+            img.footer__img(src="assets/icons/footerLogo.svg", alt="Logo")
+            h2.footer__name Afrianska
+        ul.footer__contactsList
+          li.footer__contactsItem.itemA
+            a(href="#") Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          li.footer__contactsItem.itemT
+            a(href="tel:+6281273134321") +62-812-7313-4321
+          li.footer__contactsItem.itemE
+            a(href="mailto:hello.afrian@gmail.com") hello.afrian@gmail.com
+      .footer__about
+        ul
+          li.footer__list-title About US
+          li.footer__list-item
+            a(href="#") About
+          li.footer__list-item
+            a(href="") What We Do
+          li.footer__list-item
+            a(href="#") Project
+          li.footer__list-item
+            a(href="#") How It Work With Us
+      .footer__follow
+        ul
+          li.footer__list-title Follow US
+          li.footer__list-item
+            a(href="#") Instagram
+          li.footer__list-item
+            a(href="#") Facebook
+          li.footer__list-item
+            a(href="#") LinkedIn
+          li.footer__list-item
+            a(href="#") Youtube
+  .footer__copyright 2019 Afrianska. All rights reserved

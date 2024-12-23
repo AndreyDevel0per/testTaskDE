@@ -46,14 +46,14 @@ export class FormHandler {
       method = "POST",
       showModalAfterSuccess,
       showModalAfterError,
-      preventDefault = true,
+      isAjaxForm = true,
       redirectUrlAfterSuccess = false,
       delayBeforeRedirect = false,
     } = cfg;
 
     const data = new FormData(target);
 
-    if (preventDefault) {
+    if (isAjaxForm) {
       e.preventDefault();
     }
 

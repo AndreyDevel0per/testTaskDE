@@ -1,0 +1,25 @@
+.bigClientImg {
+  margin-top: -73px;
+}
+
+.smallClientImg {
+  padding-left: 20px;
+}
+
+.itemA {
+  &::before {
+    content: "A.";
+  }
+}
+
+.itemT {
+  &::before {
+    content: "T.";
+  }
+}
+
+.itemE {
+  &::before {
+    content: "E";
+  }
+}
