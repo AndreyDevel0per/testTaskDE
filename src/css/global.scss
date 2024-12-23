@@ -69,4 +69,21 @@ h3 {
   color: var(--colorWhite);
   background-color: var(--colorBlueGray);
   border-radius: var(--borderRadius);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    min-height: 56px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    transition: all 1s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
 }
