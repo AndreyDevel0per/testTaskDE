@@ -21,27 +21,29 @@ export class ScrollLockManager {
     return ScrollLockManager.instance;
   }
 
-  static lock() {
-    ScrollLockManager.#isLocked = true;
-    document.documentElement.style.setProperty(
-      ScrollLockManager.#cssVar,
-      -1 * document.documentElement.scrollTop + "px"
-    );
-    ScrollLockManager.#lastPosition = document.documentElement.scrollTop;
-    document.documentElement.classList.add(
-      ScrollLockManager.stateClasses.noscroll
-    );
-  }
+  set isLocked(value) {
+    if (value === ScrollLockManager.#isLocked) return;
 
-  static unlock() {
-    ScrollLockManager.#isLocked = false;
-    document.documentElement.classList.remove(
-      ScrollLockManager.stateClasses.noscroll
-    );
+    if (value) {
+      ScrollLockManager.#isLocked = true;
+      document.documentElement.style.setProperty(
+        ScrollLockManager.#cssVar,
+        -1 * document.documentElement.scrollTop + "px"
+      );
+      ScrollLockManager.#lastPosition = document.documentElement.scrollTop;
+      document.documentElement.classList.add(
+        ScrollLockManager.stateClasses.noscroll
+      );
+    } else {
+      ScrollLockManager.#isLocked = false;
+      document.documentElement.classList.remove(
+        ScrollLockManager.stateClasses.noscroll
+      );
 
-    window.scrollTo(0, ScrollLockManager.#lastPosition);
+      window.scrollTo(0, ScrollLockManager.#lastPosition);
 
-    document.documentElement.style.removeProperty(ScrollLockManager.#cssVar);
+      document.documentElement.style.removeProperty(ScrollLockManager.#cssVar);
+    }
   }
 
   get isLocked() {

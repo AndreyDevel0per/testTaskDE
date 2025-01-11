@@ -23,6 +23,7 @@ export class ModalManager {
     if (ModalManager.instance) return ModalManager.instance;
     this.currentModal = null;
     this.#bindEvents();
+    this.scrollLockManager = new ScrollLockManager();
     ModalManager.instance = this;
   }
 
@@ -33,7 +34,7 @@ export class ModalManager {
         ModalManager.stateClasses.close,
         ModalManager.stateClasses.open
       );
-      ScrollLockManager.lock();
+      this.scrollLockManager.isLocked = true;
       this.currentModal = modal;
     }
   }
@@ -43,7 +44,7 @@ export class ModalManager {
       ModalManager.stateClasses.open,
       ModalManager.stateClasses.close
     );
-    ScrollLockManager.unlock();
+    this.scrollLockManager.isLocked = false;
   }
 
   #handleClick(e) {

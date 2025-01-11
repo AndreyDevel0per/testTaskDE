@@ -27,71 +27,91 @@ export class FormHandler {
     return FormHandler.instance;
   }
 
-  isNeedValidation(target) {
-    if (!target.hasAttribute(this.attrs.needValidation)) {
-      return false;
+  #getFormConfig(form) {
+    return JSON.parse(form.getAttribute(this.attrs.form)) || {};
+  }
+
+  #validateForm(target) {
+    return this.formValidator.validateForm({
+      form: target,
+    });
+  }
+
+  async #sendForm(config, data) {
+    const { url, method = "POST" } = config;
+    return fetch(url, {
+      method,
+      body: data,
+    });
+  }
+
+  #handleSuccess(config, form) {
+    const {
+      showModalAfterSuccess,
+      redirectUrlAfterSuccess,
+      delayBeforeRedirect,
+    } = config;
+
+    form.reset();
+
+    if (showModalAfterSuccess) {
+      this.modalManager.closeModal();
+      this.modalManager.openModal(showModalAfterSuccess);
     }
-    return true;
+    if (redirectUrlAfterSuccess) {
+      this.#redirect(redirectUrlAfterSuccess, delayBeforeRedirect);
+    }
+  }
+
+  #handleError(config) {
+    if (config.showModalAfterError) {
+      this.modalManager.closeModal();
+      this.modalManager.openModal(config.showModalAfterError);
+    }
+  }
+
+  #redirect(url, delay) {
+    if (delay) {
+      setTimeout(() => {
+        location.href = url;
+      }, delay);
+    } else {
+      location.href = url;
+    }
   }
 
   #handleSubmit(e) {
     const { target, submitter } = e;
 
-    if (!target.hasAttribute(`${this.attrs.form}`)) return;
-    if (!target.tagName.toLowerCase() === "form") return;
+    if (
+      !target.hasAttribute(`${this.attrs.form}`) ||
+      !target.tagName.toLowerCase() === "form"
+    ) {
+      return;
+    }
 
-    const cfg = JSON.parse(target.getAttribute(this.attrs.form));
-    const {
-      url,
-      method = "POST",
-      showModalAfterSuccess,
-      showModalAfterError,
-      isAjaxForm = true,
-      redirectUrlAfterSuccess = false,
-      delayBeforeRedirect = false,
-    } = cfg;
+    const cfg = this.#getFormConfig(target);
 
-    const data = new FormData(target);
-
-    if (isAjaxForm) {
+    if (cfg.isAjaxForm) {
       e.preventDefault();
     }
 
-    if (this.isNeedValidation(target)) {
-      const isFormValid = this.formValidator.validateForm({
-        form: target,
-      });
-      if (!isFormValid) {
-        return;
-      }
+    if (
+      target.hasAttribute(this.attrs.needValidation) &&
+      !this.#validateForm(target)
+    ) {
+      return;
     }
 
     submitter.disabled = true;
 
-    fetch(url, {
-      method,
-      body: data,
-    })
-      .then((res) => {
-        target.reset();
-        if (res.ok) {
-          if (showModalAfterSuccess) {
-            this.modalManager.closeModal();
-            this.modalManager.openModal(showModalAfterSuccess);
-          }
-        } else {
-          this.modalManager.closeModal();
-          this.modalManager.openModal(showModalAfterError);
-        }
-        if (redirectUrlAfterSuccess) {
-          if (delayBeforeRedirect) {
-            setTimeout(() => {
-              location.href = redirectUrlAfterSuccess;
-            }, delayBeforeRedirect);
-          } else {
-            location.href = redirectUrlAfterSuccess;
-          }
-        }
+    this.#sendForm(cfg, new FormData(target))
+      .then((res) =>
+        res.ok ? this.#handleSuccess(cfg, target) : this.#handleError(cfg)
+      )
+      .catch((err) => {
+        console.error(err);
+        this.#handleError(cfg);
       })
       .finally(() => {
         submitter.disabled = false;

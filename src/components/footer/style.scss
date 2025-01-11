@@ -2,7 +2,7 @@
   --footerPaddingTop: 91px;
   --footerPaddingBottom: 96px;
   --footerMaxWidth: 255px;
-  --footerPadding: 83px;
+  --footerPadding: 43px;
   --footerBtnWidth: 220px;
   --footerTitleMaxWidth: 317px;
   --footerHeadMaxWidth: 860px;
@@ -35,8 +35,11 @@
 
   &__wrapper {
     @media (width<= 1024px) {
-      padding-left: var(--footerPadding);
-      padding-right: var(--footerPadding);
+      padding-inline: var(--footerPadding);
+    }
+
+    @media (width<= 590px) {
+      --footerPadding: 10px;
     }
   }
 
@@ -47,20 +50,10 @@
     @media (width<= 1024px) {
       --footerTitleMaxWidth: 100%;
     }
-
-    @media (width<= 480px) {
-      font-size: 20px;
-      line-height: 26px;
-    }
   }
 
   &__subtitle {
     color: var(--colorGray);
-
-    @media (width<= 480px) {
-      font-size: 10px;
-      line-height: 16px;
-    }
   }
 
   &__head {
@@ -106,7 +99,11 @@
 
     @media (width<= 1024px) {
       max-width: 100%;
-      padding-inline: 30px;
+      padding-inline: 20px;
+    }
+
+    @media (width<= 480px) {
+      padding-inline: 10px;
     }
   }
 
